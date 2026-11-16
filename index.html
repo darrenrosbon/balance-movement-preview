@@ -272,6 +272,10 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}}
 @media(max-width:900px){.fs.min{width:auto!important;padding:8px 12px}.fs.min h6{gap:14px}}
+
+.fstoggle{position:fixed;top:5px;right:8px;z-index:120;font:500 9px/1 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:6px 10px;background:rgba(23,29,30,.94);color:#ECE8E1;border:1px solid rgba(236,232,225,.22);border-radius:999px;cursor:pointer;transition:border-color .3s,color .3s}
+.fstoggle:hover,.fstoggle:focus-visible{border-color:#3DBDB1;color:#3DBDB1}
+html.fs-off .fs{display:none!important}
 </style>
 </head>
 <body>
@@ -360,6 +364,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 </section>
 <footer><span>© Balance Through Movement</span><span>Linda Watson · Bordeaux, Johannesburg</span><span><a href="https://www.facebook.com/balancethroughmovement/" target="_blank" rel="noopener">Facebook</a> · <a href="https://api.whatsapp.com/send?phone=27767676560&text=Hi%20Linda%2C%20I%27d%20like%20to%20book%20a%20session." target="_blank" rel="noopener">WhatsApp</a></span></footer>
 
+<button class="fstoggle" type="button" aria-pressed="false">Hide options</button>
 <div class="fs"><h6>Type pairings</h6></div>
 <div class="fs ns"><h6>Nav style</h6></div>
 <div class="fs sh"><h6>Hero shader</h6></div>
@@ -550,6 +555,12 @@ let x0=null;st.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passi
 st.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));x0=null});}
 
 if(matchMedia('(max-width: 900px)').matches)document.querySelectorAll('.fs').forEach(f=>f.classList.add('min'));
+
+{const b=document.querySelector('.fstoggle'),de=document.documentElement;
+const set=off=>{de.classList.toggle('fs-off',off);b.textContent=off?'Show options':'Hide options';b.setAttribute('aria-pressed',off);try{localStorage.setItem('fsOff',off?'1':'0')}catch(_){}};
+let saved=null;try{saved=localStorage.getItem('fsOff')}catch(_){}
+set(saved==='1');
+b.addEventListener('click',()=>set(!de.classList.contains('fs-off')));}
 </script>
 </body>
 </html>
