@@ -148,17 +148,18 @@ nav{transition:transform .35s,background .35s}
 .bsvc .p:hover,.bsvc .p:focus-visible,.bsvc .panels:not(:hover) .p:first-child{flex:2.6}
 .bsvc .panels:has(.p:focus-visible) .p:first-child:not(:focus-visible){flex:1}
 .bsvc .p img{position:absolute;inset:0;transform:translateZ(0)}
-.bsvc .p::before{content:"";position:absolute;inset:0;z-index:1;background:#000;opacity:.4;transition:opacity .7s;pointer-events:none}
+.bsvc .p::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(16,20,21,.8),rgba(16,20,21,.4) 32%,rgba(16,20,21,0) 62%);pointer-events:none}
 .bsvc .p{contain:layout paint style}
-.bsvc .p:hover::before,.bsvc .panels:not(:hover) .p:first-child::before{opacity:.2}
-.bsvc .p::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 35%,rgba(16,20,21,.92))}
+.bsvc .p::after{content:"";position:absolute;inset:14px;z-index:1;border:1px solid rgba(236,232,225,.25);pointer-events:none;transition:border-color .6s,inset .6s}
+.bsvc .p:hover::after,.bsvc .p:focus-visible::after,.bsvc .panels:not(:hover) .p:first-child::after{border-color:var(--teal);inset:10px}
 .bsvc .in{position:absolute;left:34px;right:34px;bottom:34px;z-index:2;color:#ECE8E1}
 .bsvc .in .n{color:var(--teal)}
 .bsvc h3{font-family:var(--display);font-weight:var(--dw,400);font-size:clamp(28px,2.8vw,40px);line-height:1.1;margin:8px 0}
-.bsvc .x{max-height:0;opacity:0;overflow:hidden;transition:.6s;color:#c4ccc9;font-size:15px}
+.bsvc h3{width:min-content}
+.bsvc .x{width:min(420px,36vw);max-height:0;opacity:0;overflow:hidden;transition:.6s;color:#c4ccc9;font-size:15px}
 .bsvc .p:hover .x,.bsvc .p:focus-visible .x,.bsvc .panels:not(:hover) .p:first-child .x{max-height:220px;opacity:1}
 .bsvc .more{display:inline-block;margin-top:20px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--teal);padding-bottom:4px}
-@media(max-width:900px){.bsvc .panels{flex-direction:column;height:auto}.bsvc .p,.bsvc .p:hover{flex:none;min-height:300px}.bsvc .x{max-height:220px;opacity:1}}
+@media(max-width:900px){.bsvc h3{width:auto}.bsvc .x{width:auto}.bsvc .p::after{inset:12px}.bsvc .panels{flex-direction:column;height:auto}.bsvc .p,.bsvc .p:hover{flex:none;min-height:300px}.bsvc .x{max-height:220px;opacity:1}}
 
 .lsec{padding:130px 5vw}
 .lsec .lin{max-width:1200px;margin:0 auto}
@@ -294,6 +295,34 @@ html.fs-off .fs{display:none!important}
 .btt:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 @media(min-width:901px){html:not(.fs-off) .btt{right:248px}}
 @media(max-width:900px){html:not(.fs-off) .btt{bottom:70px;right:14px}}
+/* EXPERIMENT: full-page scroll snapping */
+@media(min-width:901px) and (min-height:640px){
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.hero,body>section,footer{scroll-snap-align:start;scroll-snap-stop:normal}
+body>section{min-height:100vh;min-height:100svh;display:grid;align-content:center}
+body>section{padding-top:clamp(84px,10svh,120px)!important;padding-bottom:clamp(40px,6svh,90px)!important}
+.bsvc .panels{height:min(640px,calc(100svh - 330px))}
+body>section.split{align-content:center}
+.final{align-content:center}
+footer{scroll-snap-align:none}
+.final footer{position:absolute;left:0;right:0;bottom:0;z-index:3;border-top:0;padding:0 calc(5vw + 76px) 34px 5vw;background:none}
+}
+@media(max-width:900px){.final footer{position:relative;z-index:3;margin-top:56px;border-top:0;padding:0 5vw 30px;justify-content:center;text-align:center}}
+/* page dots (snap mode only) */
+.pdots{display:none}
+@media(min-width:901px) and (min-height:640px){
+.pdots{display:flex;flex-direction:column;gap:4px;position:fixed;right:6px;top:50%;transform:translateY(-50%);z-index:95}
+.pdots button{position:relative;width:22px;height:22px;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+.pdots button::before{content:"";width:6px;height:6px;border-radius:50%;background:rgba(var(--inkrgb),.4);transition:.35s}
+.pdots button:hover::before{background:var(--ink);transform:scale(1.3)}
+.pdots button.on::before{background:var(--teal);height:18px;border-radius:6px}
+.pdots button span{position:absolute;right:26px;top:50%;transform:translate(6px,-50%);white-space:nowrap;font:500 10px/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--ink);background:rgba(var(--bgrgb),.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:7px 10px;opacity:0;pointer-events:none;transition:.3s}
+.pdots button:hover span,.pdots button:focus-visible span{opacity:1;transform:translate(0,-50%)}
+.pdots button:focus-visible{outline:2px solid var(--teal);outline-offset:-4px}
+}
+/* hide the stock scrollbar; scrolling still works (wheel, touch, keys); dots + progress ring show position */
+html{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 </style>
 </head>
 <body>
@@ -322,9 +351,9 @@ html.fs-off .fs{display:none!important}
 <section class="bsvc" id="services">
 <div class="bhead"><p class="eyebrow">Services</p><h2>Choose your practice.</h2></div>
 <div class="panels">
-<a class="p" href="#rates"><img loading="lazy" decoding="async" src="img/pilaties.webp" width="1100" height="825" alt="Pilates"><div class="in"><span class="n">I</span><h3>Pilates</h3><div class="x">Private, duet and small-group classes for back pain, posture, pregnancy, core strength and sports performance.<br><span class="more">Explore</span></div></div></a>
-<a class="p" href="#rates"><img loading="lazy" decoding="async" src="img/training.webp" width="1100" height="825" alt="Functional training"><div class="in"><span class="n">II</span><h3>Functional Training</h3><div class="x">Sports performance, toning, park-based boot camp, running and injury rehabilitation, built around your goals.<br><span class="more">Explore</span></div></div></a>
-<a class="p" href="#rates"><img loading="lazy" decoding="async" src="img/massage.webp" width="750" height="1082" alt="Massage therapy"><div class="in"><span class="n">III</span><h3>Massage Therapy</h3><div class="x">Sports, pregnancy and lymph drainage massage for recovery, relief and release.<br><span class="more">Explore</span></div></div></a>
+<a class="p" href="#rates"><img loading="lazy" decoding="async" src="img/pilaties.webp" width="1100" height="825" alt="Pilates"><div class="in"><h3>Pilates</h3><div class="x">Private, duet and small-group classes for back pain, posture, pregnancy, core strength and sports performance.<br><span class="more">Explore</span></div></div></a>
+<a class="p" href="#rates"><img loading="lazy" decoding="async" src="img/training.webp" width="1100" height="825" alt="Functional training"><div class="in"><h3>Functional Training</h3><div class="x">Sports performance, toning, park-based boot camp, running and injury rehabilitation, built around your goals.<br><span class="more">Explore</span></div></div></a>
+<a class="p" href="#rates"><img loading="lazy" decoding="async" src="img/massage.webp" width="750" height="1082" alt="Massage therapy"><div class="in"><h3>Massage Therapy</h3><div class="x">Sports, pregnancy and lymph drainage massage for recovery, relief and release.<br><span class="more">Explore</span></div></div></a>
 </div></section>
 
 <section class="lsec" id="linda">
@@ -379,9 +408,8 @@ html.fs-off .fs{display:none!important}
 <a href="mailto:info@balancemovement.co.za" aria-label="Email Linda"><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3.5 6.8 8.5 6.4 8.5-6.4"/></svg><span>Email</span></a>
 <a href="https://www.google.com/maps/search/?api=1&query=8+Riverside+Dr,+Bordeaux,+Randburg,+2194" target="_blank" rel="noopener" aria-label="Open the studio location in Google Maps"><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2s-6.6-5.6-6.6-11a6.6 6.6 0 0 1 13.2 0c0 5.4-6.6 11-6.6 11z"/><circle cx="12" cy="10.2" r="2.4"/></svg><span>Location</span></a>
 </div></div>
-</section>
 <footer><span>© Balance Through Movement</span><span>Linda Watson · Bordeaux, Johannesburg</span><span><a href="https://www.facebook.com/balancethroughmovement/" target="_blank" rel="noopener">Facebook</a> · <a href="https://api.whatsapp.com/send?phone=27767676560&text=Hi%20Linda%2C%20I%27d%20like%20to%20book%20a%20session." target="_blank" rel="noopener">WhatsApp</a></span></footer>
-
+</section>
 <button class="fstoggle" type="button" aria-pressed="false">Hide options</button>
 <div class="fs"><h6>Type pairings</h6></div>
 <div class="fs ns"><h6>Nav style</h6></div>
@@ -593,6 +621,14 @@ const upd=()=>{const y=scrollY,max=Math.max(1,document.documentElement.scrollHei
 b.classList.toggle('on',y>hero.offsetHeight*.6);bar.style.strokeDashoffset=150.8*(1-Math.min(1,y/max))};
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
 b.addEventListener('click',()=>{const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;scrollTo({top:0,behavior:rm?'auto':'smooth'})});}
+
+{const pages=[...document.querySelectorAll('.hero,body>section')],names=['Welcome','Approach','Services','Linda','Studio','Who we help','Reviews','Rates','Contact'];
+const nav=document.createElement('div');nav.className='pdots';nav.setAttribute('role','navigation');nav.setAttribute('aria-label','Page sections');
+const bs=pages.map((pg,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',names[i]||'Section '+(i+1));b.innerHTML='<span>'+(names[i]||'')+'</span>';
+b.onclick=()=>pg.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});nav.appendChild(b);return b});
+document.body.appendChild(nav);
+const upd=()=>{let k=0;pages.forEach((pg,i)=>{if(pg.getBoundingClientRect().top<=innerHeight*.5)k=i});bs.forEach((b,i)=>{b.classList.toggle('on',i===k);if(i===k)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')})};
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();}
 </script>
 </body>
 </html>
