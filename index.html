@@ -177,20 +177,20 @@ nav{transition:transform .35s,background .35s}
 
 .lsec{padding:130px var(--gx)}
 .lsec .lin{max-width:1200px;margin:0 auto}
-.lbar{display:flex;align-items:center;gap:36px;border:1px solid var(--line);padding:26px 36px;margin-bottom:80px;flex-wrap:wrap}
-.lportrait{width:96px;height:96px;border-radius:50%;overflow:hidden;position:relative;flex:none}
+.lsec .lin{text-align:center;max-width:1000px}
+.lsec blockquote{font-family:var(--display);font-weight:var(--dw,400);font-size:clamp(34px,5vw,72px);line-height:1.12}
+.lsec blockquote em{font-style:normal;color:var(--teal)}
+.lsig{display:inline-flex;align-items:center;gap:18px;margin:44px 0 60px;text-align:left}
+.lportrait{width:72px;height:72px;border-radius:50%;overflow:hidden;position:relative;flex:none}
 .lportrait img{filter:grayscale(.15)}
 .lportrait::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(var(--inkrgb),.35)}
-.lwho{margin-right:auto}
-.lwho h3{font-family:var(--display);font-weight:var(--dw,400);font-size:34px;line-height:1.1}
-.lwho small{color:var(--muted);font-size:12px;letter-spacing:.12em}
-.lf{padding-left:36px;border-left:1px solid var(--line);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.lf b{display:block;font-family:var(--display);font-weight:var(--dw,400);font-size:26px;letter-spacing:0;text-transform:none;color:var(--ink)}
-.lg2{display:grid;grid-template-columns:1fr 1fr;gap:7vw}
-.lsec h2{margin:16px 0 28px;font-size:clamp(36px,4.6vw,64px);line-height:1.08}
-.lbody{color:var(--muted);font-size:17px;margin-bottom:20px}
-.lquote{border-left:1px solid var(--teal);padding-left:24px;margin:30px 0;font-family:var(--display);font-size:26px;line-height:1.3}
-@media(max-width:900px){.lg2{grid-template-columns:1fr}.lf{border:0;padding:0}.lbar{padding:22px;gap:20px}}
+.lsig h3{font-family:var(--display);font-weight:var(--dw,400);font-size:28px;line-height:1.1}
+.lsig small{color:var(--muted);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.lcols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;text-align:left;border-top:1px solid var(--line);padding-top:34px}
+.lcols p{font-size:15px;color:var(--muted)}
+.lf{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.lf b{display:block;font-family:var(--display);font-weight:var(--dw,400);font-size:26px;letter-spacing:0;text-transform:none;color:var(--ink);line-height:1.15;margin-bottom:4px}
+@media(max-width:900px){.lcols{grid-template-columns:1fr 1fr}.lcols p{grid-column:1/-1}}
 
 .rin{max-width:1100px;margin:0 auto}
 .rhead{text-align:center;margin-bottom:64px}
@@ -205,6 +205,11 @@ nav{transition:transform .35s,background .35s}
 .rpr{font-family:var(--display);font-weight:var(--dw,400);color:var(--teal);font-size:clamp(32px,4vw,54px);line-height:1}
 .rfoot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:30px}
 .rfoot .note{margin:0;text-align:left}
+/* rates: lift the secondary text so it reads clearly over the glow */
+.rin .eyebrow{color:rgba(var(--inkrgb),.9)}
+.rtable th{color:rgba(var(--inkrgb),.85)}
+.rtable td small{color:rgba(var(--inkrgb),.82);font-size:14px}
+.rfoot .note{color:rgba(var(--inkrgb),.85);font-size:14px}
 @media(max-width:700px){.rtable th{width:22%}.rtable td{padding:28px 0}}
 .fs.ns{left:auto!important;right:18px;top:auto!important;bottom:14px}
 @media(max-height:960px){.fs button small{display:none}.fs button{padding:6px 2px}.fs{padding:10px 12px}}
@@ -235,10 +240,10 @@ html[data-shader]:not([data-shader=orig]) .hero .rings,html[data-shader]:not([da
 .rvw .rvin{max-width:1100px;margin:0 auto}
 .rvhead{text-align:center;margin-bottom:64px}
 .rvhead h2{margin:16px 0 26px;font-size:clamp(36px,4.6vw,64px);line-height:1.08}
-.rvscore{display:inline-flex;align-items:center;gap:14px;padding:10px 22px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink);transition:.35s}
-.rvscore:hover{border-color:var(--teal)}
+.rvscore{display:inline-flex;align-items:center;gap:14px;padding:14px 28px;border-radius:999px;font-size:14px;background:var(--teal);color:var(--bg);transition:background .35s,transform .35s,box-shadow .35s}
+.rvscore:hover{background:var(--ink);transform:translateY(-2px);box-shadow:0 10px 34px rgba(var(--accrgb),.28)}
 .rvscore b{font-weight:500}
-.rvstars{color:var(--teal);letter-spacing:.2em;font-size:13px}
+.rvstars{color:inherit;letter-spacing:.2em;font-size:13px}
 .rvw{text-align:center}
 .rvstage{display:grid;max-width:880px;margin:0 auto;outline:none}
 .rvstage:focus-visible{outline:1px solid rgba(var(--accrgb),.5);outline-offset:14px}
@@ -255,7 +260,13 @@ html[data-shader]:not([data-shader=orig]) .hero .rings,html[data-shader]:not([da
 .rvdots{display:flex;gap:10px}
 .rvdots i{width:26px;height:1px;background:rgba(var(--inkrgb),.3);cursor:pointer;transition:.4s;position:relative}
 .rvdots i::before{content:"";position:absolute;left:0;right:0;top:-12px;bottom:-12px}
-.rvdots i.on{background:var(--teal);width:44px}
+.rvdots i.on{width:64px;height:2px;background:rgba(var(--inkrgb),.22)}
+.rvdots i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--teal);transform:scaleX(0);transform-origin:left;display:none}
+.rvdots i.on::after{display:block;transform:scaleX(1)}
+.rvcycle .rvdots i.on::after{transform:scaleX(0);animation:rvfill var(--rvt,10s) linear forwards}
+.rvpaused .rvdots i.on::after{animation-play-state:paused}
+@keyframes rvfill{to{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.rvcycle .rvdots i.on::after{animation:none;transform:scaleX(1)}}
 .flinks{display:flex;justify-content:center;gap:clamp(28px,5vw,60px);flex-wrap:wrap}
 .flinks a{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--teal);transition:.35s;min-width:64px}
 .flinks svg{width:30px;height:30px;fill:currentColor}
@@ -388,10 +399,10 @@ body>section:not(.final){background:transparent!important}
 
 <section class="lsec" id="linda">
 <div class="lin">
-<div class="lbar"><div class="lportrait"><img loading="lazy" decoding="async" src="img/linda.webp" width="404" height="520" alt="Linda Watson"></div><div class="lwho"><h3>Linda Watson</h3><small>PILATES · TRAINING · MASSAGE</small></div>
-<div class="lf"><b>2002</b>Practising since</div><div class="lf"><b>London</b>Trained</div><div class="lf"><b>APPI</b>Qualified</div><div class="lf"><b>Bordeaux</b>Studio</div></div>
-<div class="lg2"><div><p class="eyebrow">Your instructor</p><h2>Training, therapy and a deep understanding of the body.</h2><a class="btn" href="#contact">Book with Linda</a></div>
-<div><p class="lbody">A qualified Personal Trainer, Clinical Pilates Instructor and Sports Massage &amp; Rehabilitation Therapist, trained in London with Premier Training and the Australian Physiotherapy &amp; Pilates Institute.</p><div class="lquote">Clients’ health and well-being is of the utmost importance.</div><p class="lbody">From working alongside chiropractors in London to helping skiers and snowboarders in a Swiss resort, Linda now treats sports people, corporates, expectant mums and the elderly right here in Johannesburg.</p></div></div>
+<p class="eyebrow">Your instructor</p>
+<blockquote>“Clients’ health and well-being is of the <em>utmost importance.</em>”</blockquote>
+<div class="lsig"><div class="lportrait"><img loading="lazy" decoding="async" src="img/linda.webp" width="404" height="520" alt="Linda Watson"></div><div><h3>Linda Watson</h3><small>Pilates · Training · Massage</small></div></div>
+<div class="lcols"><p>A qualified Personal Trainer, Clinical Pilates Instructor and Sports Massage &amp; Rehabilitation Therapist, trained in London with Premier Training and the Australian Physiotherapy &amp; Pilates Institute.</p><div class="lf"><b>2002</b>Practising since</div><div class="lf"><b>APPI</b>Qualified</div><div class="lf"><b>Bordeaux</b>Studio</div></div>
 </div></section>
 
 <section class="split rev help-wrap" id="studio" style="background:var(--bg2)">
@@ -628,13 +639,24 @@ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest
  const t=document.querySelector(id);if(!t)return;e.preventDefault();t.scrollIntoView({behavior:beh,block:'start'});
  try{history.replaceState(null,'',id)}catch(_){}});
 
-{const sl=[...document.querySelectorAll('.rvs')],dots=[...document.querySelectorAll('.rvdots i')],st=document.querySelector('.rvstage');let i=0;
-const go=n=>{i=(n+sl.length)%sl.length;sl.forEach((s,j)=>s.classList.toggle('on',j==i));dots.forEach((d,j)=>d.classList.toggle('on',j==i))};
+{const sl=[...document.querySelectorAll('.rvs')],dots=[...document.querySelectorAll('.rvdots i')],st=document.querySelector('.rvstage'),sec=document.querySelector('#reviews');let i=0;
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* auto-cycle: the active dot's fill bar is the timer; when its animation ends we advance. Hover/focus or leaving the screen pauses it; manual moves restart it. */
+const restart=()=>{sec.classList.remove('rvcycle');void sec.offsetWidth;if(!still)sec.classList.add('rvcycle')};
+const go=n=>{i=(n+sl.length)%sl.length;sl.forEach((s,j)=>s.classList.toggle('on',j==i));dots.forEach((d,j)=>d.classList.toggle('on',j==i));restart()};
+dots.forEach(d=>d.addEventListener('animationend',()=>go(i+1)));
 document.querySelector('.rvprev').onclick=()=>go(i-1);document.querySelector('.rvnext').onclick=()=>go(i+1);
 dots.forEach((d,j)=>d.onclick=()=>go(j));
 st.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(i-1);if(e.key==='ArrowRight')go(i+1)});
 let x0=null;st.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
-st.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));x0=null});}
+st.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));x0=null});
+let vis=false,foc=false;const pz=()=>sec.classList.toggle('rvpaused',foc||!vis||document.hidden);
+/* the timer ignores the mouse entirely; it pauses only for keyboard focus, when the section is off-screen, or when the tab is hidden */
+const hold=document.querySelector('.rvin');
+hold.addEventListener('focusin',e=>{foc=e.target.matches(':focus-visible');pz()});hold.addEventListener('focusout',()=>{foc=false;pz()});
+document.addEventListener('visibilitychange',pz);
+new IntersectionObserver(e=>{vis=e[0].intersectionRatio>=.5;pz()},{threshold:[0,.5,1]}).observe(sec);
+restart();pz();}
 
 if(matchMedia('(max-width: 900px)').matches)document.querySelectorAll('.fs').forEach(f=>f.classList.add('min'));
 
@@ -707,6 +729,7 @@ if(gl){
 {const L=[...document.querySelectorAll('.wholist li')],O=[...document.querySelectorAll('.whoout div')];
 const pick=i=>{L.forEach((x,j)=>x.classList.toggle('on',i===j));O.forEach((x,j)=>x.classList.toggle('on',i===j))};
 L.forEach((li,i)=>{li.addEventListener('mouseenter',()=>pick(i));li.addEventListener('focus',()=>pick(i));li.addEventListener('click',()=>pick(i))})}
+
 </script>
 </body>
 </html>
